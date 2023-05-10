@@ -45,42 +45,6 @@ fun MyApp(content: @Composable () -> Unit) {
 }
 
 
-@Composable
-fun MovieRow(movie: Movie, onItemClick: (String) -> Unit = { }) {
-    Card(
-        modifier = Modifier
-            .padding(4.dp)
-            .fillMaxWidth()
-            .height(130.dp)
-            .clickable {
-                onItemClick(movie.id)
-            },
-
-        shape = RoundedCornerShape(corner = CornerSize(16.dp)),
-        elevation = 6.dp
-    ) {
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            Surface(
-                modifier = Modifier
-                    .padding(12.dp)
-                    .size(100.dp),
-                shape = RectangleShape,
-                elevation = 4.dp
-            ) {
-                Icon(
-                    imageVector = Icons.Default.AccountBox,
-                    contentDescription = "Movie Image"
-                )
-            }
-            Text(
-                text = movie.title,
-                modifier = Modifier.padding(start = 16.dp)
-            )
-        }
-    }
-}
-
-
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
