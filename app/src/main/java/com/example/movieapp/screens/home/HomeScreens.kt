@@ -1,6 +1,6 @@
-package com.example.movieapp.screens
+package com.bawp.movieapp.screens.home
 
-import android.annotation.SuppressLint
+import android.util.Log
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -18,36 +18,37 @@ import com.bawp.movieapp.model.getMovies
 import com.example.movieapp.MovieRow
 import com.example.movieapp.navigation.MovieScreens
 
-@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun HomeScreen(navController: NavController){
+fun HomeScreen(navController: NavController) {
+    Scaffold(topBar = {
+        TopAppBar(backgroundColor = Color.Transparent,
+            elevation = 0.dp) {
+            Text(text = "Movies")
 
-    Scaffold(
-        topBar = {
-            TopAppBar(
-                backgroundColor = Color.Transparent,
-                elevation = 0.dp
-            ) {
-                Text(text = "Movies")
-            }
-        },
-    ) {
-        MainContent(navController=navController )
+        }
+    },) {
+        MainContent(
+            navController : NavController)
+
+
     }
+
 }
+
 @Composable
 fun MainContent(
     navController: NavController,
-    movieList: List<Movie> = getMovies()
-
-) {
+    movieList: List<Movie> = getMovies()) {
     Column(modifier = Modifier.padding(12.dp)) {
         LazyColumn {
-            items(items = movieList) { movie ->
-                MovieRow(movie = movie) {
-                    navController.navigate("${MovieScreens.DetailsScreen.name}/$movie")
+            items(items = movieList) {
+                MovieRow(movie = it){ movie ->
+                    navController.navigate(route = MovieScreens.DetailsScreen.name+"/$movie")
+
                 }
             }
         }
+
     }
+
 }
